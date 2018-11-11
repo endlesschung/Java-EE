@@ -103,6 +103,49 @@
               </trim>
     </select>
     
+    <!-- 批处理添加部门信息 -->
+    <insert id="deptSave">
+       insert into dept(dname,loc)
+       values
+       <foreach collection="list" item="dept" separator=",">
+           (#{dept.dname},#{dept.loc})      
+       </foreach>
+    </insert>
+   
+    <!-- 使用List集合保存查询条件(deptno) -->
+   <select id="deptFindByList" resultType="dept">
+       select deptno,dname,loc from dept
+       where deptno in
+       <foreach collection="list" item="deptno" open="(" close=")" separator=",">
+                #{deptno}
+       </foreach>
+   </select> 
+   
+    <!-- 使用Array保存查询条件(deptno) -->
+   <select id="deptFindByArray" resultType="dept">
+       select deptno,dname,loc from dept
+       where deptno in
+       <foreach collection="array" item="deptno" open="(" close=")" separator=",">
+                #{deptno}
+       </foreach>
+   </select> 
+   
+   
+    <!-- 使用Map保存查询条件(deptno) -->
+   <select id="deptFindByMap" resultType="dept">
+       select deptno,dname,loc from dept
+       where deptno in
+       <foreach collection="myMap.values" item="deptno" open="(" close=")" separator=",">
+                #{deptno}
+       </foreach>
+   </select> 
+   
+   
+    
+    
+    
+    
+    
    
 </mapper>
 

@@ -2,7 +2,10 @@ package com.kaikeba.test;
 
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.executor.parameter.ParameterHandler;
 import org.apache.ibatis.executor.statement.StatementHandler;
@@ -85,6 +88,68 @@ public class TestMain_01 {
     	 System.out.println(list.size());
     }
     
+    @Test
+    public void test06(){
+    	 DeptMapper dao=  session.getMapper(DeptMapper.class);
+    	 Dept dept = new Dept();  
+    	 dept.setDname("开发一部");
+    	 dept.setLoc("北京");
+    	 
+    	 Dept dept2 = new Dept();  
+    	 dept2.setDname("开发er部");
+    	 dept2.setLoc("北京");
+    	 
+    	 List<Dept> deptList = new ArrayList<Dept>();
+    	 deptList.add(dept);
+    	 deptList.add(dept2);
+    	 dao.deptSave(deptList);
+    	 session.commit();
+    	
+    }
+    
+    
+    @Test
+    public void test07(){
+    	try{
+    		 DeptMapper dao=  session.getMapper(DeptMapper.class);
+        	 List list = new ArrayList();
+        	 list.add(41);
+        	 list.add(42);
+        	 List<Dept> deptList= dao.deptFindByList(list);
+        	 System.out.println("");
+    	}catch(Exception ex){
+    		ex.printStackTrace();
+    	}
+    }
+    
+    @Test
+    public void test08(){
+    	try{
+    		 DeptMapper dao=  session.getMapper(DeptMapper.class);
+        	 int dpetArray[]=new int[2];
+        	 dpetArray[0]=41;
+        	 dpetArray[1]=42;
+        	 List<Dept> deptList= dao.deptFindByArray(dpetArray);
+        	 System.out.println("");
+    	}catch(Exception ex){
+    		ex.printStackTrace();
+    	}
+    }
+    
+    
+    @Test
+    public void test09(){
+    	try{
+    		 DeptMapper dao=  session.getMapper(DeptMapper.class);
+        	 Map map = new HashMap();
+        	 map.put("key1", 41);
+        	 map.put("key2", 42);
+        	 List<Dept> deptList= dao.deptFindByMap(map);
+        	 System.out.println("");
+    	}catch(Exception ex){
+    		ex.printStackTrace();
+    	}
+    }
    
     @After
     public void end(){

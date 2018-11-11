@@ -10,10 +10,7 @@
  
     <package name="com.kaikeba.beans"/>
  </typeAliases>
- <objectFactory type="com.kaikeba.util.MyObjectFactory"></objectFactory>
-  <plugins>
-     <plugin interceptor="com.kaikeba.util.SimpleInterceptor"></plugin>
-  </plugins>
+ 
  
   <environments default="development">
     <environment id="development">
